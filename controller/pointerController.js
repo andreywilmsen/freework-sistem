@@ -4,7 +4,13 @@ let validation = require('./validation');
 
 let pointerController = {
   get: async function (req, res) {
-    res.send('Hello from get');
+    let name = req.body.name
+    let month = req.body.month;
+
+    let response = await Pointer.findOne({ name: name, "register.mes": month });
+    let registrosDoMesAtual = response.register.filter(registro => registro.mes === month);
+
+    res.send(registrosDoMesAtual);
   },
   post: async function (req, res) {
     let name = req.body.name;
@@ -14,7 +20,8 @@ let pointerController = {
 
     const dataAtual = new Date();
     const ano = dataAtual.getFullYear();
-    const mes = dataAtual.getMonth() + 1;
+    // const mes = dataAtual.getMonth() + 1;
+    const mes = 5;
     const dia = dataAtual.getDate();
     let actualMonth = mes;
 
