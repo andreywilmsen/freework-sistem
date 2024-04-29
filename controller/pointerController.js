@@ -29,6 +29,8 @@ let pointerController = {
         let updatedPointer = await Pointer.findOneAndUpdate(
           { _id: findedUser._id, "register.mes": actualMonth },
           {
+            // Insere no primeiro elemento que corresponde o critério da busca (o $ é o indice
+            // variavel)
             $push: { "register.$.pointers": { data: `${dia}-${mes}-${ano}`, pointer } }
           }
         );
