@@ -1,13 +1,25 @@
 const express = require("express");
 const router = express.Router();
-const apiController = require("../controller/userController");
+const userController = require("../controller/userController");
+const pointerController = require("../controller/pointerController");
 
-router.post("/login", apiController.login);
+// Rotas de autenticação e login
 
-router.post("/login/register", apiController.register);
+router.post("/login", userController.login);
 
-router.put("/login/edit", apiController.edit);
+router.post("/login/register", userController.register);
 
-router.get("/auth", apiController.auth);
+router.put("/login/edit", userController.edit);
+
+router.get("/auth", userController.auth);
+
+// Rotas de registro ponto
+
+router.get("/pointer/get", pointerController.get);
+
+router.post("/pointer/post", pointerController.post);
+
+router.put("/pointer/update", pointerController.update);
+
 
 module.exports = router;

@@ -7,7 +7,8 @@
     "express": "^4.19.2",
     "jsonwebtoken": "^9.0.2",
     "mongodb": "^6.5.0",
-    "mongoose": "^8.3.0"
+    "mongoose": "^8.3.0",
+    "react-scripts": "^5.0.1"
   },
   "scripts": {
     "build_client": "npm run build --prefix client",
@@ -16,6 +17,11 @@
     "start_node": "node index.js",
     "start_dev": "npm run --prefix client build && concurrently \"npm run start_node\" \"npm run start_client\"",
     "postinstall": "npm i --prefix client && npm run build_client"
-    
-  }
+  },
+  "name": "freework-sistem",
+  "version": "1.0.0",
+  "description": "🔒 **API de autenticação e gerenciamento de usuários**",
+  "main": "index.js",
+  "author": "",
+  "license": "ISC"
 }

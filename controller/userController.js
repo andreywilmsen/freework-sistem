@@ -5,7 +5,7 @@ let salt = Number(process.env.SALT);
 let jwt = require('jsonwebtoken');
 let validation = require('./validation');
 
-let controller = {
+let userController = {
   register: async (req, res) => {
 
     // Verifica se os dados enviados estão cumprindo as definições de tamanhos de Strings
@@ -110,4 +110,4 @@ let controller = {
   },
 };
 
-module.exports = controller;
+module.exports = userController;
