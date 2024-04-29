@@ -21,27 +21,38 @@ let pointerController = {
     let user = await Pointer.findOne({ name: req.body.name });
 
     if (user) {
-
       // Procura no banco de dados a coleção do dia em que está sendo registrado.
-
-      let findedUser = await Pointer.findOne({ "pointers.data": `${dia}-${mes}-${ano}` });
-
-      // Se encontrado, será atualizado a coleção do dia, inserindo mais um registro ponto
+      let findedUser = await Pointer.findOne({ "register.mes": actualMonth });
 
       if (findedUser) {
-
-        // PROVAVELMENTE O ERRO TA AQUI, NÃO ESTÁ CRIANDO UMA ARRAY COM TODOS OS REGISTROS PONTOS DO MES
-
-        let updatedPointer = await Pointer.updateOne({ _id: findedUser._id }, { $push: { pointer: { data: `${dia}-${mes}-${ano}`, pointer: pointer } } }
+        // Se o mês já existir no register, adicione o novo objeto ao array pointers do objeto existente
+        let updatedPointer = await Pointer.findOneAndUpdate(
+          { _id: findedUser._id, "register.mes": actualMonth },
+          {
+            $push: { "register.$.pointers": { data: `${dia}-${mes}-${ano}`, pointer } }
+          }
         );
-        res.status(200).json({ status: 'success', data: 'Registro atualizado.' });
+      } else {
+        // Se o mês não existir no register, crie um novo objeto no array register com o novo mês e o novo objeto pointers
+        let updatedPointer = await Pointer.findOneAndUpdate(
+          { _id: user._id },
+          {
+            $push: {
+              register: {
+                mes: actualMonth,
+                pointers: [{ data: `${dia}-${mes}-${ano}`, pointer }]
+              }
+            }
+          }
+        );
       }
-    }
 
+      res.status(200).json({ status: 'success', data: 'Registro atualizado.' });
+    }
     // Caso contrário, se não achar, será criado uma nova coleção com um novo registro ponto
 
     else {
-      let register = [{ mes: actualMonth, pointers: { data: `${dia}-${mes}-${ano}`, pointer } }];
+      let register = [{ mes: actualMonth, pointers: [{ data: `${dia}-${mes}-${ano}`, pointer }] }];
       let response = await Pointer.create({ name, register });
 
       res.status(200).json({ status: 'success', data: 'Registrado com sucesso.' });
