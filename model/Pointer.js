@@ -1,9 +1,17 @@
-const mongoose = require("mongoose");
+const mongoose = require('mongoose');
+const Schema = mongoose.Schema;
 
-let pointerSchema = new mongoose.Schema({
+const pointerSchema = new Schema({
   name: { type: String, minlenght: 3, maxlenght: 50 },
-  register: { type: Array, required: true },
-  createdAt: { type: Date, required: true, default: Date.now() },
+  register: [{
+    mes: Number,
+    days: [{
+      data: String, 
+      pointers: [String]
+    }]
+  }]
 });
 
-module.exports = Pointer = mongoose.model("Pointer", pointerSchema);
+const Pointer = mongoose.model('Pointer', pointerSchema);
+
+module.exports = Pointer;
