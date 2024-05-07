@@ -77,14 +77,15 @@ npm install
 ```
 3. Configure as variáveis de ambiente:
    - Crie um arquivo .env na raiz do projeto e defina as seguintes variáveis:
-     ``
+   ```
     PORT = 8080
     MONGO_CONNECT_URL = mongodb+srv://root:Andrey1309.@cluster0.nhew8ef.mongodb.net/?retryWrites=true&w=majority&appName=Cluster0
     SALT = 10
     TOKEN_SECRET= SAdihqwuidUIHDA2dsauh
     NODE_ENV=development
-     ``
-4. Inicie o servidor Node.js:
+   
+     ```
+5. Inicie o servidor Node.js:
 ```bash
 npm run start_node
 ```
