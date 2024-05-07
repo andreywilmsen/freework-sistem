@@ -8,7 +8,7 @@ function PointerRecorderTable(props) {
 
     return (
         <div className="tableRecorderCard">
-            <Table />
+            <Table date={props.date} />
             <div className="showRecorder">
                 <a onClick={props.click} >Voltar</a>
             </div>

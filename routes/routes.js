@@ -15,7 +15,7 @@ router.get("/auth", userController.auth);
 
 // Rotas de registro ponto
 
-router.get("/pointer/get", pointerController.get);
+router.post("/pointer/get", pointerController.get);
 
 router.post("/pointer/post", pointerController.post);
 

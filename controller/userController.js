@@ -44,13 +44,14 @@ let userController = {
 
     // Cria token de acesso e o insere no cabeçalho da resposta
     try {
-      let token = jwt.sign({ email: req.body.email }, process.env.TOKEN_SECRET, { expiresIn: 600 });
+      let token = jwt.sign({ email: req.body.email }, process.env.TOKEN_SECRET, { expiresIn: '24h' });
 
       res.header("authorization-token", token)
 
       res.status(200).json({
         status: "success",
-        data: token
+        data: token,
+        name: user.name
       });
 
     } catch (err) {

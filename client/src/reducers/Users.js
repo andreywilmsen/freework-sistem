@@ -8,7 +8,8 @@ export default function (state = initialState, action) {
     switch (action.type) {
         // tratamento de login // seta em local Storage o token para verificações
         case "LOGIN":
-            localStorage.setItem("token", action.payload);
+            localStorage.setItem("token", action.payload.token);
+            localStorage.setItem("name", action.payload.name);
             // Retorna true para o state atual, permitindo continuar navegando na área administrativa
             return true;
         case "LOGOUT":

@@ -1,13 +1,57 @@
 import React, { useState, useEffect } from 'react';
 import '../styles/Table.css'
+import axios from 'axios';
 
-function Table() {
+function Table(props) {
+
+    const [month, setMonth] = useState("");
+    const [pointers, setPointers] = useState([]);
+
+
+    async function handleMonth(e) {
+        setMonth(e.target.value);
+    }
+
+    useEffect(() => {
+        async function fetchData() {
+            try {
+                const response = await axios.post("http://localhost:8080/pointer/get", {
+                    name: localStorage.getItem("name"),
+                    month: Number(month)
+                });
+                setPointers(response.data.registros[0].days);
+            } catch (err) {
+                setPointers([])
+                console.log(err);
+            }
+        }
+
+        fetchData();
+    }, [month])
+
     return (
         <div className="Table">
+            <span>Selecione o mês aqui</span>
+            <select onChange={handleMonth}>
+                <option value=""></option>
+                <option value="1">1</option>
+                <option value="2">2</option>
+                <option value="3">3</option>
+                <option value="4">4</option>
+                <option value="5">5</option>
+                <option value="6">6</option>
+                <option value="7">7</option>
+                <option value="8">8</option>
+                <option value="9">9</option>
+                <option value="10">10</option>
+                <option value="11">11</option>
+                <option value="12">12</option>
+            </select>
+
             <table>
                 <thead>
                     <tr>
-                        <th></th>
+                        <th>Data</th>
                         <th>Entrada</th>
                         <th>Saida</th>
                         <th>Entrada</th>
@@ -16,22 +60,16 @@ function Table() {
                     </tr>
                 </thead>
                 <tbody>
-                    <tr>
-                        <td>24/04/2024</td>
-                        <td>08:00</td>
-                        <td>12:00</td>
-                        <td>13:00</td>
-                        <td>17:00</td>
-                        <td>08:00</td>
-                    </tr>
-                    <tr>
-                        <td>24/04/2024</td>
-                        <td>08:00</td>
-                        <td>12:00</td>
-                        <td>13:00</td>
-                        <td>17:00</td>
-                        <td>08:00</td>
-                    </tr>
+                    {pointers && (pointers.map(pointer => (
+                        <tr key={pointer._id}>
+                            <td>{pointer.data}</td>
+                            <td>{pointer.pointers[0]}</td>
+                            <td>{pointer.pointers[1]}</td>
+                            <td>{pointer.pointers[2]}</td>
+                            <td>{pointer.pointers[3]}</td>
+                            <td>...</td>
+                        </tr>
+                    )))}
                 </tbody>
             </table>
         </div>

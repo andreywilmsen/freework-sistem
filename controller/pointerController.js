@@ -5,12 +5,16 @@ let validation = require('./validation');
 let pointerController = {
   get: async function (req, res) {
     let name = req.body.name
-    let month = req.body.month;
+    let month = Number(req.body.month);
+    try {
+      let response = await Pointer.findOne({ name: name, "register.mes": month });
+      let registrosDoMesAtual = response.register.filter(registro => registro.mes === month);
 
-    let response = await Pointer.findOne({ name: name, "register.mes": month });
-    let registrosDoMesAtual = response.register.filter(registro => registro.mes === month);
-
-    res.send(registrosDoMesAtual);
+      // res.send(registrosDoMesAtual);
+      res.status(200).json({ registros: registrosDoMesAtual });
+    } catch (err) {
+      res.status(500).json({ error: 'Registros não encontrado' });
+    }
   },
   post: async function (req, res) {
     let name = req.body.name;

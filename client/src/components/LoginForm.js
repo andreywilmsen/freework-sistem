@@ -51,7 +51,7 @@ function LoginForm() {
             const res = await axios.post('http://localhost:8080/login', data);
             const token = res.data.data;
             // Acessa o reducer de login, setando o token no local Storage e mudando o valor de state para true
-            dispatch(LoginAction(token));
+            dispatch(LoginAction(token, res.data.name));
             // Limpa os valores dos inputs
             setEmail("");
             setPassword("");

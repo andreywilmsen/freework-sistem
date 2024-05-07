@@ -67,7 +67,7 @@ function PointerRecorder() {
                         )}
 
                         {grid && (
-                            <PointerRecorderTable click={handleGrid} />
+                            <PointerRecorderTable date={date} click={handleGrid} />
                         )}
                     </div>
                 </div>

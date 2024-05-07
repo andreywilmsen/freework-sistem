@@ -1,8 +1,8 @@
 // Action de login
-export const LoginAction = (token) => {
+export const LoginAction = (token, name) => {
     return {
         type: 'LOGIN',
-        payload: token
+        payload: {token, name}
     };
 };
 // Action de logout
