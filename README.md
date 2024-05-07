@@ -78,9 +78,11 @@ npm install
 3. Configure as variáveis de ambiente:
    - Crie um arquivo .env na raiz do projeto e defina as seguintes variáveis:
      ```
-     PORT=3001
-     MONGODB_URI=sua-url-de-conexao-com-o-banco-de-dados
-     JWT_SECRET=sua-chave-secreta-para-geracao-de-token
+     PORT = 8080
+    MONGO_CONNECT_URL = mongodb+srv://root:Andrey1309.@cluster0.nhew8ef.mongodb.net/?retryWrites=true&w=majority&appName=Cluster0
+    SALT = 10
+    TOKEN_SECRET= SAdihqwuidUIHDA2dsauh
+    NODE_ENV=development
      ```
 4. Inicie o servidor Node.js:
 ```bash
