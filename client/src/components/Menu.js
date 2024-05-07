@@ -9,7 +9,7 @@ function Menu(props) {
         <div className="Menu">
             <ul>
                 {/* Fará um map com o array passado pela props para inserir todos os links do menu */}
-                {props.links.map((link, index) => (<><Link to={`/${link.link}`}><li key={index}>{link.name}</li></Link></>))}
+                {props.links.map((link, index) => (<Link to={`/${link.link}`} key={index}><li>{link.name}</li></Link>))}
             </ul>
         </div>
     )

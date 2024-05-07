@@ -3,10 +3,10 @@ import '../styles/Table.css'
 import axios from 'axios';
 
 function Table(props) {
+    let actualMonth = new Date().getMonth() + 1;
 
-    const [month, setMonth] = useState("");
+    const [month, setMonth] = useState(actualMonth);
     const [pointers, setPointers] = useState([]);
-
 
     async function handleMonth(e) {
         setMonth(e.target.value);
@@ -29,11 +29,21 @@ function Table(props) {
         fetchData();
     }, [month])
 
+    function sumHours(hours) {
+        let totalMinutes = 0;
+        hours.forEach(hour => {
+            const [hourPart, minutePart, secondPart] = hour.split(':').map(Number);
+            totalMinutes += hourPart * 60 + minutePart + secondPart / 60;
+        });
+        const totalHours = Math.floor(totalMinutes / 60);
+        const remainingMinutes = Math.floor(totalMinutes % 60);
+        return `${totalHours < 10 ? '0' : ''}${totalHours}:${remainingMinutes < 10 ? '0' : ''}${remainingMinutes}`;    
+    }
+
     return (
         <div className="Table">
             <span>Selecione o mês aqui</span>
-            <select onChange={handleMonth}>
-                <option value=""></option>
+            <select defaultValue={actualMonth} onChange={handleMonth}>
                 <option value="1">1</option>
                 <option value="2">2</option>
                 <option value="3">3</option>
@@ -67,7 +77,7 @@ function Table(props) {
                             <td>{pointer.pointers[1]}</td>
                             <td>{pointer.pointers[2]}</td>
                             <td>{pointer.pointers[3]}</td>
-                            <td>...</td>
+                            <td>{sumHours(pointer.pointers)}</td>
                         </tr>
                     )))}
                 </tbody>
