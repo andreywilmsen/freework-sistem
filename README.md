@@ -1,5 +1,3 @@
-Claro, aqui está a documentação com emojis adicionados:
-
 📝 **FreeWork Sistema - Documentação**
 
 👁️‍🗨️ **Visão Geral**
