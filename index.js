@@ -20,12 +20,11 @@ if (process.env.NODE_ENV != "development") {
     res.sendFile(path.join(__dirname, 'client/build', 'index.html'), (err) => {
       if (err) return res.status(500).send(err);
     });
-
-  })
+  });
 }
 
-app.use("/", express.json(), router);
-
-app.listen(PORT, () => {
+const server = app.listen(PORT, () => {
   console.log(`Server running on PORT: ${PORT}`);
 });
+
+module.exports = { app, server };

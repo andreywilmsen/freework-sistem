@@ -3,6 +3,12 @@ const router = express.Router();
 const userController = require("../controller/userController");
 const pointerController = require("../controller/pointerController");
 
+// Teste de conexão de servidor
+
+router.get("/", (req, res) => {
+    res.send({});
+})
+
 // Rotas de autenticação e login
 
 router.post("/login", userController.login);

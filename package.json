@@ -8,9 +8,11 @@
     "jsonwebtoken": "^9.0.2",
     "mongodb": "^6.5.0",
     "mongoose": "^8.3.0",
-    "react-scripts": "^5.0.1"
+    "react-scripts": "^5.0.1",
+    "supertest": "^7.0.0"
   },
   "scripts": {
+    "test": "jest --detectOpenHandles",
     "build_client": "npm run build --prefix client",
     "build": "npm build",
     "start_client": "npm start --prefix client",
@@ -23,5 +25,8 @@
   "description": "🔒 **API de autenticação e gerenciamento de usuários**",
   "main": "index.js",
   "author": "",
-  "license": "ISC"
+  "license": "ISC",
+  "devDependencies": {
+    "jest": "^27.5.1"
+  }
 }

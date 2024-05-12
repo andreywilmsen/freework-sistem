@@ -12,8 +12,6 @@ db.on("error", () => {
   console.log("Falha ao conectar o banco de dados.");
 });
 
-db.once("open", () => {
-  console.log("Banco de dados acessado com sucesso!");
-});
+console.log("Conexão com o banco de dados estabelecida com sucesso!");
 
 module.exports = db;
